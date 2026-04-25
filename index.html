@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuestras Historias - Episode</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            background: #000; 
+            display: flex; 
+            justify-content: center; 
+            height: 100vh; 
+            overflow: hidden; 
+        }
+        
+        #contenedor {
+            position: relative;
+            height: 100vh;
+            aspect-ratio: 9 / 16;
+            /* Usamos portada.png que es como está en tu GitHub */
+            background: url('portada.png') no-repeat center center;
+            background-size: cover;
+        }
+
+        .btn-invisible {
+            position: absolute;
+            cursor: pointer;
+            /* border: 2px solid red; */ /* Quita el comentario para ver las zonas de clic */
+        }
+
+        /* Ajuste para que los clics den en tus portadas de la imagen */
+        #temp1 { top: 60%; left: 5%; width: 28%; height: 35%; }
+        #temp2 { top: 60%; left: 36%; width: 28%; height: 35%; }
+        #temp3 { top: 60%; left: 67%; width: 28%; height: 35%; }
+    </style>
+</head>
+<body>
+    <div id="contenedor">
+        <div class="btn-invisible" id="temp1" onclick="empezar('feliz')"></div>
+        <div class="btn-invisible" id="temp2" onclick="empezar('ardiente')"></div>
+        <div class="btn-invisible" id="temp3" onclick="empezar('todo')"></div>
+    </div>
+
+    <script>
+        function empezar(tipo) {
+            localStorage.setItem('historiaSeleccionada', tipo);
+            window.location.href = 'escena.html';
+        }
+    </script>
+</body>
+</html>
+
