@@ -8,45 +8,66 @@
         body, html {
             margin: 0; padding: 0; width: 100%; height: 100%;
             overflow: hidden; background-color: black;
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
+        
         #contenedor {
             width: 100%; height: 100vh;
             background-size: cover;
             background-position: center;
             display: flex;
             flex-direction: column;
-            justify-content: flex-end;
-            transition: background-image 0.5s ease-in-out;
+            justify-content: flex-end; /* Empuja el contenido hacia abajo */
+            align-items: center;
         }
+
         #ui-dialogo {
-            background: rgba(255, 255, 255, 0.9);
-            margin: 20px;
-            padding: 15px;
-            border-radius: 15px;
-            border: 3px solid #ff4d4d;
-            min-height: 100px;
+            background: rgba(255, 255, 255, 0.95); /* Fondo casi blanco pero un poco transparente */
+            width: 90%; /* Que no toque los bordes laterales */
+            margin-bottom: 50px; /* AQUÍ AJUSTAS LA ALTURA: Súbelo más aumentando este número */
+            padding: 20px;
+            border-radius: 20px;
+            border: 4px solid #ff4d4d;
+            box-shadow: 0px 4px 15px rgba(0,0,0,0.5);
             cursor: pointer;
+            box-sizing: border-box;
+            z-index: 10;
         }
+
         #nombre {
             font-weight: bold;
             color: #ff4d4d;
-            font-size: 1.2em;
-            margin-bottom: 5px;
+            font-size: 1.3em;
+            text-transform: uppercase;
+            margin-bottom: 8px;
             display: block;
+            border-bottom: 1px solid #ffcccc;
         }
+
         #texto {
-            color: #333;
-            font-size: 1.1em;
-            line-height: 1.4;
+            color: #222;
+            font-size: 1.15em;
+            line-height: 1.5;
+            margin: 0;
+            font-weight: 500;
+        }
+
+        /* Pequeña animación para que el texto aparezca suave */
+        .animar {
+            animation: aparecer 0.3s ease-in;
+        }
+
+        @keyframes aparecer {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
 <body onclick="avanzar()">
     <div id="contenedor">
-        <div id="ui-dialogo">
+        <div id="ui-dialogo" class="animar">
             <span id="nombre">Cargando...</span>
-            <p id="texto">Toca para empezar la historia...</p>
+            <p id="texto">Toca para continuar...</p>
         </div>
     </div>
 
