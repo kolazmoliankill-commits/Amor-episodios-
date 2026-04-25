@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nuestras Historias - Episode</title>
+    <title>Nuestras Historias</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { 
@@ -18,21 +18,23 @@
             position: relative;
             height: 100vh;
             aspect-ratio: 9 / 16;
-            /* Usamos portada.png que es como está en tu GitHub */
+            /* Aquí ya queda fijo como portada.png */
             background: url('portada.png') no-repeat center center;
-            background-size: cover;
+            background-size: contain;
+            background-color: #000;
         }
 
         .btn-invisible {
             position: absolute;
             cursor: pointer;
-            /* border: 2px solid red; */ /* Quita el comentario para ver las zonas de clic */
+            /* border: 2px solid rgba(255, 0, 0, 0.5); */ /* Descomenta si necesitas ver dónde caen los clics */
         }
 
-        /* Ajuste para que los clics den en tus portadas de la imagen */
-        #temp1 { top: 60%; left: 5%; width: 28%; height: 35%; }
-        #temp2 { top: 60%; left: 36%; width: 28%; height: 35%; }
-        #temp3 { top: 60%; left: 67%; width: 28%; height: 35%; }
+        /* Coordenadas ajustadas para los 3 rectángulos verticales de la nueva portada */
+        #temp1 { top: 25%; left: 8%; width: 84%; height: 19%; }
+        #temp2 { top: 45%; left: 8%; width: 84%; height: 19%; }
+        #temp3 { top: 65%; left: 8%; width: 84%; height: 19%; }
+
     </style>
 </head>
 <body>
@@ -50,4 +52,3 @@
     </script>
 </body>
 </html>
-
