@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Episodio</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@700&display=swap');
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: #000; font-family: 'Open Sans', sans-serif; overflow: hidden; }
+
+        #escenario {
+            width: 100vw; height: 100vh;
+            background-size: cover; background-position: center;
+            display: flex; align-items: flex-end; justify-content: center;
+            transition: 0.5s;
+        }
+
+        .personaje {
+            height: 75vh; position: absolute; bottom: -100%; 
+            transition: 0.6s ease-out, filter 0.3s;
+            filter: brightness(0.6);
+        }
+
+        .en-escena { bottom: 0; }
+        .hablando { filter: brightness(1.1); transform: scale(1.05); z-index: 10; }
+
+        #dialogo-box {
+            width: 90%; max-width: 500px; background: white;
+            border-radius: 15px; padding: 20px; margin-bottom: 30px;
+            z-index: 100; position: relative; cursor: pointer;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+        }
+
+        #nombre {
+            position: absolute; top: -15px; left: 20px;
+            background: #ff4da6; color: white; padding: 5px 15px;
+            border-radius: 10px; font-weight: bold; font-size: 0.9rem;
+        }
+
+        #texto { color: #333; font-size: 1.1rem; line-height: 1.3; }
+    </style>
+</head>
+<body>
+    <div id="escenario">
+        <img src="jaider_sprite.png" id="p-jaider" class="personaje">
+        <img src="leslie_sprite.png" id="p-leslie" class="personaje">
+
+        <div id="dialogo-box" onclick="avanzar()">
+            <div id="nombre"></div>
+            <p id="texto"></p>
+        </div>
+    </div>
+    <script src="historia.js"></script>
+</body>
+</html>
+
