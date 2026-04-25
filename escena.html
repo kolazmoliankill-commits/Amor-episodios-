@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Episodio</title>
+    <title>Episodio - Jugando</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@700&display=swap');
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -14,6 +14,7 @@
             background-size: cover; background-position: center;
             display: flex; align-items: flex-end; justify-content: center;
             transition: 0.5s;
+            background-color: #222; /* Fondo gris oscuro si no hay imagen */
         }
 
         .personaje {
@@ -43,15 +44,14 @@
 </head>
 <body>
     <div id="escenario">
-        <img src="jaider_sprite.png" id="p-jaider" class="personaje">
-        <img src="leslie_sprite.png" id="p-leslie" class="personaje">
+        <img src="jaider.png" id="p-jaider" class="personaje">
+        <img src="leslie.png" id="p-leslie" class="personaje">
 
         <div id="dialogo-box" onclick="avanzar()">
-            <div id="nombre"></div>
-            <p id="texto"></p>
+            <div id="nombre">Cargando...</div>
+            <p id="texto">Toca para continuar</p>
         </div>
     </div>
     <script src="historia.js"></script>
 </body>
 </html>
-
