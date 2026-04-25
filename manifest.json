@@ -1,0 +1,11 @@
+{
+  "short_name": "J&L Juego",
+  "name": "Jaider & Leslie Juego",
+  "icons": [
+    { "src": "portada.png", "sizes": "512x512", "type": "image/png" }
+  ],
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#000",
+  "theme_color": "#ff4d4d"
+}
