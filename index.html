@@ -3,52 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nuestras Historias</title>
+    <title>J&L: Nuestra Historia</title>
+    <link rel="manifest" href="manifest.json">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { 
-            background: #000; 
-            display: flex; 
-            justify-content: center; 
-            height: 100vh; 
-            overflow: hidden; 
-        }
-        
-        #contenedor {
-            position: relative;
-            height: 100vh;
-            aspect-ratio: 9 / 16;
-            /* Aquí ya queda fijo como portada.png */
-            background: url('portada.png') no-repeat center center;
-            background-size: contain;
-            background-color: #000;
-        }
-
-        .btn-invisible {
-            position: absolute;
-            cursor: pointer;
-            /* border: 2px solid rgba(255, 0, 0, 0.5); */ /* Descomenta si necesitas ver dónde caen los clics */
-        }
-
-        /* Coordenadas ajustadas para los 3 rectángulos verticales de la nueva portada */
-        #temp1 { top: 25%; left: 8%; width: 84%; height: 19%; }
-        #temp2 { top: 45%; left: 8%; width: 84%; height: 19%; }
-        #temp3 { top: 65%; left: 8%; width: 84%; height: 19%; }
-
+        body { margin: 0; padding: 0; background: #000; display: flex; justify-content: center; align-items: center; height: 100vh; font-family: sans-serif; color: white; overflow: hidden; }
+        #portada { width: 100%; height: 100%; background: url('portada.png') center/cover; position: absolute; filter: brightness(0.6); }
+        #ui { z-index: 10; text-align: center; }
+        h1 { font-size: 3em; text-shadow: 0 0 20px #ff4d4d; margin-bottom: 20px; }
+        .btn { background: #ff4d4d; color: white; padding: 15px 40px; border-radius: 50px; text-decoration: none; font-weight: bold; box-shadow: 0 5px 15px rgba(255, 77, 77, 0.4); display: inline-block; }
     </style>
 </head>
 <body>
-    <div id="contenedor">
-        <div class="btn-invisible" id="temp1" onclick="empezar('feliz')"></div>
-        <div class="btn-invisible" id="temp2" onclick="empezar('ardiente')"></div>
-        <div class="btn-invisible" id="temp3" onclick="empezar('todo')"></div>
+    <div id="portada"></div>
+    <div id="ui">
+        <h1>Nuestra Historia</h1>
+        <p>Jaider & Leslie</p>
+        <a href="escena.html" class="btn">INICIAR JUEGO</a>
     </div>
-
     <script>
-        function empezar(tipo) {
-            localStorage.setItem('historiaSeleccionada', tipo);
-            window.location.href = 'escena.html';
-        }
+        if ('serviceWorker' in navigator) { navigator.serviceWorker.register('sw.js'); }
     </script>
 </body>
 </html>
