@@ -1,73 +1,64 @@
-// Recuperar la elección de la portada
-const historiaSeleccionada = localStorage.getItem('historiaSeleccionada') || 'feliz';
+let historiaActual = "inicio";
 let indice = 0;
 
 const tramas = {
-    feliz: [
-        { n: "Jaider", t: "Hola mi niña... ¿estás lista para un viaje en el tiempo?", f: "felices_1.jpg" },
-        { n: "Leslie", t: "¡Jaider! Me encantan tus sorpresas. ¿A dónde vamos?", f: "felices_1.jpg" },
-        // ... (resto de tus diálogos estáticos) ...
-        { n: "Jaider", t: "Y yo a ti, mi reina. Este es solo el comienzo de nuestra historia infinita.", f: "felices_4.jpg" }
-    ],
-    ardiente: [
-        // --- AQUÍ ACTIVAMOS LA ANIMACIÓN DEL BESO APASIONADO ---
-        { 
-            n: "Jaider", 
-            t: "(Me acerco a ella, la pasión nos envuelve...)", 
-            f: "felices_4.jpg", // Usamos la foto del beso
-            // --- NUEVO: Añadimos la animación y el flash ---
-            a: "zoom-pasion", 
-            e: "flash" 
-        },
-        { 
-            n: "Leslie", 
-            t: "(Sus labios son fuego... no quiero que esto acabe nunca)", 
-            f: "felices_4.jpg",
-            a: "zoom-pasion" // Mantenemos el zoom mientras sigue el diálogo
+    "inicio": [
+        { n: "Jaider", t: "Hola mi niña... bienvenida a nuestro rincón especial.", f: "felices_1.jpg" },
+        { n: "Jaider", t: "¿Qué quieres que hagamos hoy?", f: "felices_1.jpg", 
+          opciones: [
+              { texto: "Recordar momentos lindos", destino: "ruta_feliz" },
+              { texto: "Tener una cita intensa", destino: "ruta_pasion" }
+          ] 
         }
     ],
-    todo: [
-        { n: "Jaider", t: "Próximamente...", f: "portada.png" }
+    "ruta_feliz": [
+        { n: "Jaider", t: "Cada sonrisa tuya es un regalo para mí.", f: "felices_2.jpg" },
+        { n: "Leslie", t: "Y tú eres mi lugar favorito en el mundo.", f: "felices_3.jpg" },
+        { n: "Sistema", t: "FIN: Amor Eterno ❤️", f: "felices_3.jpg" }
+    ],
+    "ruta_pasion": [
+        { n: "Jaider", t: "Me encanta cuando nos perdemos el uno en el otro...", f: "felices_4.jpg", anim: "zoom" },
+        { n: "Jaider", t: "Te amo como a nadie, Leslie.", f: "felices_4.jpg", anim: "zoom" },
+        { n: "Sistema", t: "FIN: Pasión Infinita 🔥", f: "felices_4.jpg" }
     ]
 };
 
 function actualizarEscena() {
-    const paso = tramas[historiaSeleccionada][indice];
-    
-    // 1. Manejar el Fondo y Animaciones
-    const fondoDiv = document.getElementById('fondo-imagen');
-    const capaEfectos = document.getElementById('capa-efectos');
+    const paso = tramas[historiaActual][indice];
+    const fondo = document.getElementById('fondo-imagen');
+    const contenedorOpciones = document.getElementById('contenedor-opciones');
 
-    // Limpiamos animaciones anteriores para que no se acumulen
-    fondoDiv.className = ''; 
-    capaEfectos.className = '';
-
-    // Cambiar la foto de fondo
-    fondoDiv.style.backgroundImage = `url('${paso.f}')`;
-
-    // ACTIVAR ANIMACIÓN SI EXISTE
-    if (paso.a === "zoom-pasion") {
-        fondoDiv.classList.add('animacion-zoom'); // Activamos el zoom CSS
-    }
-
-    // ACTIVAR EFECTO DE FLASH SI EXISTE
-    if (paso.e === "flash") {
-        capaEfectos.classList.add('efecto-flash'); // Activamos el flash CSS
-    }
-
-    // 2. Cambiar Texto y Nombre (Tus IDs deben coincidir)
+    fondo.style.backgroundImage = `url('${paso.f}')`;
+    fondo.className = paso.anim === "zoom" ? "zoom-vivo" : "";
     document.getElementById('nombre').innerText = paso.n;
     document.getElementById('texto').innerText = paso.t;
+
+    if (paso.opciones) {
+        contenedorOpciones.innerHTML = "";
+        contenedorOpciones.style.display = "flex";
+        paso.opciones.forEach(opt => {
+            const btn = document.createElement('div');
+            btn.className = "boton-opcion";
+            btn.innerText = opt.texto;
+            btn.onclick = (e) => {
+                e.stopPropagation();
+                historiaActual = opt.destino;
+                indice = 0;
+                contenedorOpciones.style.display = "none";
+                actualizarEscena();
+            };
+            contenedorOpciones.appendChild(btn);
+        });
+    }
 }
 
 function avanzar() {
+    if (tramas[historiaActual][indice].opciones) return;
     indice++;
-    if (indice < tramas[historiaSeleccionada].length) {
+    if (indice < tramas[historiaActual].length) {
         actualizarEscena();
     } else {
-        window.location.href = 'index.html'; // O lo que uses para terminar
+        window.location.href = "index.html";
     }
 }
-
-// Iniciar la primera escena al cargar
 window.onload = actualizarEscena;
